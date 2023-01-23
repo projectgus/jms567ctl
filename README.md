@@ -64,7 +64,7 @@ sudo ./jms567ctl.py -d /dev/sdX erase_flash
 
 ## Accessing via pyusb
 
-By default the above commands use `py3_sg` to send raw SCSI commands to a disk in the JMS567 device on Linux. There's also a very experimental pysub backend that you can try to use instead:
+By default the above commands use `py3_sg` to send raw SCSI commands to a disk in the JMS567 device on Linux. There's also a very experimental pyusb backend that you can try to use instead:
 
 ```
 sudo ./jms567ctl.py -d 152d: erase_flash
@@ -96,9 +96,9 @@ In general, if using this program or following what you read in this README then
 
 The USB flashing protocol is all implemented via custom vendor SCSI opcodes, which is probably the best way to do it really.
 
-I've noticed at least three opcodes in use - `df` for flash-related stuff, `ff` for reset and probably other things, and `e0` for chip info and maybe other things. It's quite possible some of these are just calling addressed subroutines in the mask ROM and/or reading arbitrary bytes from RAM, I don't know.
+I've noticed at least three opcodes in use - `df` for flash-related stuff, `ff` for reset and probably other things, and `e0` for chip info and maybe other things. It's quite possible that the rest of some of these commands is an address and the opcode is to call a subroutine and/or reading arbitrary bytes from memory, I don't know.
 
-The firmware .bin file format for JMS567 seems to be copied 1:1 onto the flash chip, and there's no other data stored there. The file format looks like bare 8051 opcodes, starting with an interrupt vector table at the top (I'm no 8051 expert but `12 xx xx xx` is the `LCALL` opcode with a 3-byte destination address, and `c3 22` is a return opcode, and the first 0x200 bytes of most JMS567 firmware is variations of these opcode sequences spaced 0x10 bytes apart).
+The firmware .bin file format for JMS567 seems to be copied 1:1 onto the flash chip, and there's no other data or framing stored in flash or passed in the USB data packets. The file format looks like bare 8051 opcodes, starting with an interrupt vector table at the top (I'm no 8051 expert but `12 xx xx xx` is the `LCALL` opcode with a 3-byte destination address, and `c3 22` is a return opcode, and the first 0x200 bytes of most JMS567 firmware is variations of these opcode sequences spaced 0x10 bytes apart).
 
 There does appear to be a checksum of some kind, probably the two bytes right before the "NVS" section.
 
