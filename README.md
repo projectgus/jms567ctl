@@ -86,7 +86,7 @@ The JMS567 seems really simple - if there's an external flash connected then it 
 
 So you should always be able to unbrick it by erasing the flash, even if somehow it doesn't recognise any of the USB commands then you could program the flash chip directly on the board.
 
-Even simpler, I suspect (but don't know) that if you do something like short the flash CS pin to ground and then power on, the boot-time verification will fail and it will boot the mask ROM firmware (which can then be used to flash a new firmware over USB). If you try something like this and it works, let me know!
+Even simpler, I suspect (but don't know) that if you do something like short the flash CS pin to ground and then power on, the boot-time verification will fail and it will boot the mask ROM firmware (which can then be used to flash a new firmware over USB). If you try something like this and it works, let me know! (**EDIT**: Someone has confirmed that this worked to unbrick their adapter!)
 
 In general, if using this program or following what you read in this README then you should assume anything is possible - including but not limited to permanent bricking, physical damage, disk catches fire, etc, etc.
 
