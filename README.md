@@ -2,7 +2,18 @@
 
 This is an unofficial, unstable, very alpha quality, flashing tool for the JMicron JMS567 USB to SATA interface chip. It is written in Python.
 
-Tested once on Linux using JMS567 in a Icybox IB-3640SU3, only. It worked then. It may not work with other devices, or even work again with this device!
+## Has worked with
+
+(This is not a guarantee of support!)
+
+* Icybox IB-3640SU3
+* StarTech S355BU33ERM ([reference](https://github.com/projectgus/jms567ctl/issues/1))
+
+## Probably also works with
+
+* StarTech S358BU33ERM ([reference](https://github.com/projectgus/jms567ctl/issues/1))
+
+*Feel free to send PRs to expand these lists!*
 
 ## Background
 
