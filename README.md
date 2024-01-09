@@ -27,6 +27,12 @@ Recommended to use [py3_sg](https://github.com/tvladyslav/py3_sg) on Linux to ac
 
 There's a very experimental [pyusb](https://github.com/pyusb/pyusb/) backend, but it is pretty unreliable especially (it seems) on some UAS-enabled firmwares... :|
 
+Or if you [install Nix](https://github.com/DeterminateSystems/nix-installer?tab=readme-ov-file#the-determinate-nix-installer) you can run it like this e.g.:
+
+```
+$ nix run github:projectgus/jms567ctl -- --help
+```
+
 ## Commands
 
 ### Read firmware version
