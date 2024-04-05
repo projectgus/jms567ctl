@@ -93,7 +93,7 @@ Here are some combinations reported to work, please add more if you find them:
 
 | Firmware                    | SHA256                                                           | Features?                          | Product(s)        |
 |-----------------------------|------------------------------------------------------------------|------------------------------------|-------------------|
-| JMS567_SSI_v20.06.00.01.bin | b0947f0989b45ca81a56280476dd2f3c7e282681f29b20947f57503262c2af61 | UAS, supports SATA port multiplier | Icybox IB-3640SU3 |
+| JMS567_SSI_v20.06.00.01.bin | b0947f0989b45ca8<br>1a56280476dd2f3c<br>7e282681f29b2094<br>7f57503262c2af61 | UAS, supports SATA port multiplier | Icybox IB-3640SU3 |
 
 Because the firmware binaries themselves are intellectual property of JMicron and/or the product vendor, they're not distributed here.
 
