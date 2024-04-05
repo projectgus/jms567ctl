@@ -13,7 +13,7 @@ This is an unofficial, unstable, very alpha quality, flashing tool for the JMicr
 
 * StarTech S358BU33ERM ([reference](https://github.com/projectgus/jms567ctl/issues/1))
 
-*Feel free to send PRs to expand these lists!*
+*If you've used this tool with another device, please send a PR or open an issue to add to these lists.*
 
 ## Background
 
@@ -77,7 +77,23 @@ sudo ./jms567ctl.py -d /dev/sdX erase_flash
 
 * The `reset_chip` step often fails with a SCSI error because the chip has already reset before responding to the SCSI command.
 * The `write_flash` command has a footgun with not erasing sectors before writing them. The only workaround is to pass `--erase` and erase the whole chip. PRs to add whatever vendor SCSI command issues "erase sector" or "erase region" commands to the flash are welcome!
-* The `pyusb` backend doesn't work very well (see next section).
+* The `pyusb` backend doesn't work very well (see [Accessing via pyusb](#Accessing-via-pyusb)).
+
+## Firmware
+
+In theory, every individual product needs custom firmware and the product vendor will provide updates.
+
+In practice, most product vendors build minor variations on the same few reference designs so firmware can be shared across products. This is particularly useful if you have a product where the vendor only shipped one old and buggy firmware version!
+
+Here are some combinations reported to work, please add more if you find them:
+
+| Firmware                    | SHA256                                                           | Features?                          | Product(s)        |
+|-----------------------------|------------------------------------------------------------------|------------------------------------|-------------------|
+| JMS567_SSI_v20.06.00.01.bin | b0947f0989b45ca81a56280476dd2f3c7e282681f29b20947f57503262c2af61 | UAS, supports SATA port multiplier | Icybox IB-3640SU3 |
+
+Because the firmware binaries themselves are intellectual property of JMicron and/or the product vendor, they're not distributed here.
+
+*Note: Just because someone reported a random firmware works with their enclosure, does not constitute any guarantee that firmware will work with your enclosure. Nor that it will not catch fire, not permanently damage the enclosure, etc, etc. Use at own risk!*
 
 ## Accessing via pyusb
 
