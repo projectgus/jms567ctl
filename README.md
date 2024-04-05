@@ -2,6 +2,10 @@
 
 This is an unofficial, unstable, very alpha quality, flashing tool for the JMicron JMS567 USB to SATA interface chip. It is written in Python.
 
+## Disclaimer
+
+In general, if using this program or following what you read in this README then you should assume anything is possible - including but not limited to permanent bricking, physical damage, disk catches fire, etc, etc.
+
 ## Has worked with
 
 (This is not a guarantee of support!)
@@ -117,11 +121,15 @@ So yeah, this may not very useful... It might work if it was updated to also enc
 
 The JMS567 seems really simple - if there's an external flash connected then it reads the contents into its SRAM, verifies some kind of checksum[*], then runs the program. If there's no program then it runs a basic firmware from mask ROM.
 
-So you should always be able to unbrick it by erasing the flash, even if somehow it doesn't recognise any of the USB commands then you could program the flash chip directly on the board.
+So you should always be able to unbrick it by erasing the flash. If somehow it doesn't recognise any of the USB commands then you could program the flash chip directly on the board.
 
-Even simpler, it seems that if you short the flash chip CS pin to ground and then power on, the boot-time verification will fail and it will boot the mask ROM firmware. The ROM firmware can then be used to flash a new firmware over USB.
+It is also possible to unbrick by powering on the chip and corrupting the boot-time read of the flash chip. To do this, first identify the flash chip (usually placed near the JMS567 chip) and identify pin 1 as marked on the chip. Look up the datasheet for the flash chip to find the pin assignments. Next, carefully short the flash chip's CS pin to either the VCC (3.3V) or VSS (GND) pin. Use a short length of wire or similar, it has to be a very low resistance connection to work. Power on the enclosure with the short in place, then remove it.
 
-In general, if using this program or following what you read in this README then you should assume anything is possible - including but not limited to permanent bricking, physical damage, disk catches fire, etc, etc.
+This should cause the initial flash read to contain partially or fully corrupted data. Checksum verification will fail, and the JMS567 will boot into the mask ROM firmware instead. The ROM firmware can then be used to erase the flash chip and write a new firmware over USB.
+
+Note there is a small risk of damaging the JMS567 chip by shorting the CS pin output, but this method is reported working in multiple cases now.
+
+Reminder: You may also need to connect at least one SATA disk before the JMS567 will enumerate via USB at all.
 
 [*] I wasn't sure if there even was a checksum, maybe just a watchdog timer, but I changed a random error message string in the middle of the firmware binary(!) and it went back to the mask ROM firmware. So I guess there's a checksum!
 
